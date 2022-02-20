@@ -39,19 +39,6 @@ class Problem
         arr = solve(arr,product);
         for(Integer i: arr)
             System.out.print(i + " ");
-
-
-
-
-
-         
-
-	    
-        
-	   
-	   
-	
-	    
 		// your code goes here
 	}
 }
