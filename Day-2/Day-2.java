@@ -13,22 +13,44 @@ import javax.lang.model.util.ElementScanner14;
 class Problem
 {
 
-    static  Integer[] solve(Integer arr[],int product,int flag)
+    static  Integer[] solveWithDiv(Integer arr[],int product,int flag)
     {
+        Integer output[] = new Integer[arr.length];
         
         for(int i=0;i<arr.length;i++)
         {
             if(flag>1)
-                arr[i]=0;
+                output[i]=0;
             else if(flag==1 && arr[i]!=0)
-                arr[i]=0;
+                output[i]=0;
             else if(flag==0)
-            arr[i] = product/arr[i];
+            output[i] = product/arr[i];
             else
-                arr[i]=product;
+                output[i]=product;
         }
             
-        return arr;
+        return output;
+    }
+    static Integer[] solveWithoutDiv(Integer arr[])
+    {
+
+        
+        int n = arr.length;
+        Integer output [] = new Integer[n];
+        int  right_prod=1;
+        output[0]=1;
+        for(int i=1;i<n;i++)
+        {
+            output[i] = output[i-1]*arr[i-1];
+        }
+        for(int i=n-2;i>=0;i--)
+        {
+            right_prod = right_prod * arr[i+1];
+            output[i] = output[i]*right_prod;
+        }
+
+
+        return output;
     }
     
 	public static void main (String[] args) throws java.lang.Exception
@@ -49,9 +71,22 @@ class Problem
         sc.close();
         int size = li.size();
         Integer arr[] = new Integer[size];
+        Integer output1[],output2[];
         arr = li.toArray(new Integer[0]);
-        arr = solve(arr,product,flag);
-        for(Integer i: arr)
+
+        // by using division
+
+         output1  = solveWithDiv(arr,product,flag);
+        for(Integer i: output1)
+            System.out.print(i + " ");
+        System.out.println();
+
+        // without using division
+
+
+
+        output2 = solveWithoutDiv(arr); 
+        for(Integer i: output2)
             System.out.print(i + " ");
 		// your code goes here
 	}
