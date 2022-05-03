@@ -14,11 +14,35 @@ import java.util.Scanner;
 
 
 class PerfectNumber{
+    public static int checkSum(int n)
+    {
+        int sum=0;
+        for(int i=n;i>0;i=i/10)
+        {
+            sum = sum + i%10;
+        }
+        return sum;
+    }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();
-        int res = n*10 + (10-(n%10)-(n/10));
-        System.out.println(res);
+        int curr = 19;
+        int count=0;
+        while(true)
+        {
+            int res = checkSum(curr);
+            if(res==10)
+            {
+                count++;
+            }
+            if(count==n)
+            {
+                System.out.println(curr);
+                break;
+            }
+            else
+                curr+=9;
+        }
 
     }
 }
